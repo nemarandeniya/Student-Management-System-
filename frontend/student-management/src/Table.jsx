@@ -1,11 +1,10 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import Model from './Model';
-import Edit from './Edit';
+import { Link } from 'react-router-dom';
 
 
-const Table = ({ students }) => {
+const Table = ({ students, handleDelete }) => {
     return (
         <div>
             <table className='table table-striped'>
@@ -27,11 +26,11 @@ const Table = ({ students }) => {
                             <td>{student.email}</td>
                             <td>{student.contactNumber}</td>
                             <td>
-
-
-
-                                <button type="button" className="btn btn-warning btn-small" data-bs-toggle="modal" data-bs-target="#EditStudentId">
+                                <Link to={`/update/${student._id}`} style={{ marginRight: '5px' }} type="button" className="btn btn-warning btn-small">
                                     <i className="bi bi-pencil"></i>
+                                </Link>
+                                <button className="btn btn-danger btn-small" onClick={(e) => { handleDelete(student._id) }}>
+                                    <i className="bi bi-person-x"></i>
                                 </button>
                             </td>
                         </tr>
@@ -41,7 +40,7 @@ const Table = ({ students }) => {
             {/* Modal  */}
 
             <div>
-                <Model title="Edit Student" modalId="EditStudentId" body={<Edit />} />
+                {/* <Model title="Edit Student" modalId="EditStudentId" body={<Edit />} /> */}
             </div>
         </div>
     )

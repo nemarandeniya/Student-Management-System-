@@ -9,9 +9,18 @@ const Home = () => {
     const [students, setStudents] = useState([])
     useEffect(() => {
         axios.get('http://localhost:5000/getstudents')
-            .then(students => setStudents(students.data))
+            .then(response => setStudents(response.data))
             .catch(err => console.log(err))
     }, [])
+
+    const handleDelete = (id) => {
+        axios.delete('http://localhost:5000/deletestudent/' + id)
+            .then(response => {
+                console.log(response)
+                window.location.reload()
+            })
+            .catch(err => console.log(err))
+    }
     return (
         <div>
             <nav className="navbar bg-secondary">
@@ -32,7 +41,7 @@ const Home = () => {
             <div>
                 <div className='row mt-5'>
                     <div className="col-10 mx-auto">
-                        <Table students={students} />
+                        <Table students={students} handleDelete={handleDelete} />
                     </div>
                 </div>
             </div>

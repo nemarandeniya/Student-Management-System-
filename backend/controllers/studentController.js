@@ -26,3 +26,23 @@ exports.addstudents = async (req, res) => {
     }
 }
 
+exports.getstudent = async (req, res) => {
+    const id = req.params.id
+    studentModal.findById({ _id: id })
+        .then(users => res.json(users))
+        .catch(err => res.json(err))
+}
+
+exports.updatestudent = async (req, res) => {
+    const id = req.params.id
+    studentModal.findByIdAndUpdate({ _id: id }, { name: req.body.name, email: req.body.email, contactNumber: req.body.contactNumber })
+        .then(users => res.json(users))
+        .catch(err => res.json(err))
+}
+
+exports.deletestudent = async (req, res) => {
+    const id = req.params.id
+    studentModal.findByIdAndDelete({ _id: id })
+        .then(users => res.json(users))
+        .catch(err => res.json(err))
+}

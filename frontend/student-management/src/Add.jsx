@@ -1,5 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
+
 
 const Add = () => {
     const [formData, setFormData] = useState({
@@ -8,6 +10,7 @@ const Add = () => {
         email: '',
         contactNumber: ''
     })
+    const navigate = useNavigate()
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -27,6 +30,8 @@ const Add = () => {
                 email: '',
                 contactNumber: ''
             })
+            navigate('/')
+            window.location.reload()
         } catch (error) {
             console.error("Error adding student:", error);
             alert("Failed to add student.");
